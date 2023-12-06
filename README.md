@@ -30,7 +30,19 @@ The second line is **1849 characters** if you are curious. There shouldn't techn
 
 ### Part 1
 
+Another straightforward solution, .split() just about solves this day entirely
+
 ### Part 2
+
+Slightly more complicated, but essentially the same method to solve part 2, not much to comment on
+
+```python
+for sect in ("".join(s.split(": ")[1])).split("; "):
+        colors = dict()
+        for c in sect.split(", "):
+            colors[c.split(" ")[1] if "\n" not in c.split(" ")[1] else c.split(" ")[1][:-1]] = int(c.split(" ")[0])
+```
+This part is shared in both parts
 
 </details>
 
