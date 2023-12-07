@@ -69,7 +69,24 @@ This system proved to be efficient enough, solving the input array i was given i
 
 ### Part 1
 
+Day 4 was another simple one, solved with not much more than .split() and .isnumeric()
+
 ### Part 2
+
+Part 2 was barely different to part 1, not much to comment on
+
+```python
+def winning(s):
+    res = []
+    winners, total = s.split("|")
+    winners = [a for a in winners.split(": ")[1].split(" ") if a.isnumeric()]
+    total = [a for a in total[:-1].split(" ") if a.isnumeric()]
+    for n in total:
+        if n in winners:
+            res.append(n)
+    return res
+```
+This function was the core of both parts.
 
 </details>
 
