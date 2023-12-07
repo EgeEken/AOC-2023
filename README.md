@@ -51,7 +51,16 @@ This part is shared in both parts
 
 ### Part 1
 
+For part 1 i went through the array until i found a number, checked around the number using a big if statement, if there was a symbol around the number, i followed the line until the number ended, and once i found the full number, i added it to the sum, and replaced the following numbers with empty strings to prevent adding the same number several times.
+
 ### Part 2
+
+Part 2 was similar but instead of finding numbers, i found asterisks, here i had to consider the possibilities of the numbers around each asterisk and what they represent, it required finding how many numbers are around, and if there's only 2, what those numbers are in full, for example
+
+This is the paint.net page where i figured out a way to simplify all possibilities down to, it probably looks like nonsense but what it means is that i cut the sections around it into top, middle, and bottom, where middle only has two characters, so has different properties. There is a total of 4 ways to read the numbers around, so i labeled them with appropriate numbers in a way that lines them up nicely for a condition where if their sum is not exactly -1, 1, or 3, it can be discarded (except for the very unsatisfying, unfortunate edge case of top:-1, mid:1, bot:-1). 
+![image](https://github.com/EgeEken/AOC-2023/assets/96302110/92c21b48-2760-4087-b717-07a173305b0f)
+
+This system proved to be efficient enough, solving the input array i was given in only 15 milliseconds, for python i think this is a good accomplishment
 
 </details>
 
