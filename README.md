@@ -60,7 +60,10 @@ Part 2 was similar but instead of finding numbers, i found asterisks, here i had
 This is the paint.net page where i figured out a way to simplify all possibilities down to, it probably looks like nonsense but what it means is that i cut the sections around it into top, middle, and bottom, where middle only has two characters, so has different properties. There is a total of 4 ways to read the numbers around, so i labeled them with appropriate numbers in a way that lines them up nicely for a condition where if their sum is not exactly -1, 1, or 3, it can be discarded (except for the very unsatisfying, unfortunate edge case of top:-1, mid:1, bot:-1). 
 ![image](https://github.com/EgeEken/AOC-2023/assets/96302110/92c21b48-2760-4087-b717-07a173305b0f)
 
-This system proved to be efficient enough, solving the input array i was given in only 15 milliseconds, for python i think this is a good accomplishment
+This system proved to be efficient enough, solving the input array i was given in only 14 milliseconds on average, for python i think this is a good accomplishment
+
+<img width="185" alt="image" src="https://github.com/EgeEken/AOC-2023/assets/96302110/f72f2332-5214-426a-9b14-8e73f01ed572">
+
 
 </details>
 
@@ -95,7 +98,54 @@ This function was the core of both parts.
 
 ### Part 1
 
+For this one i just did a straightforward map because it was easy and short enough and fast enough to brute force
+The program first creates a map list of all the layers,
+in the format of map[(range_start, range_end)] = offset
+Then puts each seed through each map until it reaches the end.
+
 ### Part 2
+
+At first i of course had to try to brute force this part by just putting each number in the new range through the system of the first question, but that did not work out, so i had to optimize.
+
+I did it by changing the system so it works through ranges instead of single numbers, at first i was trying to make it work in a similar way but about two hours into debugging that, i had an epiphany:
+This question was perfect for recursion.
+
+First i reworked the "range_remove(r1, r2)" system i had thought of, what it does is remove r2 from r1, and return two values, one set of all the new ranges that remain, one tuple of the range that was cut, so that the cut part can be treated with the relevant offset.
+
+Here's a visualization of it:
+
+![image](https://github.com/EgeEken/AOC-2023/assets/96302110/45084775-e8d1-46bb-89d7-70186254a69c)
+
+and the recursive minimum function:
+
+```python
+def recursive_min(r, mapindex, ml):
+    if mapindex == len(ml):
+        return r[0]
+    cutset = set()
+    remset = set()
+    for n in ml[mapindex]:
+        _, cut = range_remove(r, n)
+        if cut != ():
+            cutset.add(cut)
+            remset.add((cut[0] + ml[mapindex][n], cut[1] + ml[mapindex][n]))
+    remaining = {r}
+    while len(cutset) > 0:
+        c2 = cutset.pop()
+        for r2 in remaining:
+            rem, cut = range_remove(r2, c2)
+            if cut != ():
+                remaining = rem
+    remset |= remaining
+    return min(recursive_min(ri, mapindex + 1, ml) for ri in remset)
+```
+
+This function takes in a set of ranges from the input, the same maplist created in part 1, and a map index to know which layer we are on, then recursively applies each layer to each range, including the new ranges created during the cutting process. The recursive system ended up being very efficient which is super satisfying, especially considering the brute force solution was likely going to take days. This program finds the solution within 4 milliseconds on average:
+
+<img width="211" alt="image" src="https://github.com/EgeEken/AOC-2023/assets/96302110/e60ca273-7b02-4aca-b307-20d88c86d75e">
+
+
+
 
 </details>
 
