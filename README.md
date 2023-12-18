@@ -152,8 +152,29 @@ This function takes in a set of ranges from the input, the same maplist created 
 ## Day 6
 <details><summary>(click here for details)</summary>
 
+
 ### Part 1
+
+Day 6 was shockingly easy, especially after day 5 being the hardest one so far
+Really nothing to note, except once again after finishing this one i decided to shorten the code and brought it down to 3 lines total for the entire day6.py file, which is of course a bigger thing than just the main function being 2 lines:
+
+```python
+res = 1
+for td in list(zip([int(i) for i in open("input.txt", "r").readlines()[0][:-1].split(": ")[1].split(" ") if i.isnumeric()], [int(i) for i in open("input.txt", "r").readlines()[1][:-1].split(": ")[1].split(" ") if i.isnumeric()])): res *= len([1 for i in range(1, td[0]) if i * (td[0] - i) > td[1]])
+print(res)
+```
+
+This one is "only" 299 columns unlike the one i did for day 1 by the way 
 
 ### Part 2
 
+Part 2 was nothing special, it COULD have required some math to optimize if it was gonna take long enough but thankfully it takes less than 3 seconds to brute force so there was no point really
+
 </details>
+
+
+<br /> 
+
+#
+
+### The rest will be added once I get back to it, currently busy with exams and life
