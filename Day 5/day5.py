@@ -15,8 +15,7 @@ for i in range(1, len(lines)):
     elif lines[i] != "\n":
         d, s, r = parsetoint(lines[i])
         maplist[j][(s,s+r)] = d-s
-            
-            
+              
 firststart = time.time()
 minimum = float("inf")
 for s in seeds:
@@ -26,8 +25,7 @@ for s in seeds:
         for n in m:
             if temp >= n[0] and temp < n[1]:
                 temp = m[n] + temp
-                break
-                
+                break    
     print(temp)
     minimum = min(minimum, temp)
     print("seed", s, "complete in:", time.time() - start)
