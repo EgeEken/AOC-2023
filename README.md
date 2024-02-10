@@ -172,9 +172,67 @@ Part 2 was nothing special, it COULD have required some math to optimize if it w
 
 </details>
 
+## Day 7
+<details><summary>(click here for details)</summary>
+
+
+### Part 1
+
+Day 7 was pretty easy, but i ended up wasting a couple hours on it because i got stuck trying to make the card valuation system work properly, without realising that the text says the order of the cards matters more than the value of the cards in the hand for some reason? That changes the card comparison function from the complicated evaluation of the card type as well as the values of individual cards in them into these simple 7 lines:
+
+```python
+def compare(c1, c2):
+    for i in range(len(c1)):
+        if numerate(c1[i]) > numerate(c2[i]):
+            return 1
+        elif numerate(c1[i]) < numerate(c2[i]):
+            return -1
+    return 0
+```
+
+(numerate() is only for the sake of convenience/readability, it could just as well be written individually each time but that would be pretty ugly code)
+
+```python
+def numerate(c):
+    return 13 - ["A", "K", "Q", "T", "9", "8", "7", "6", "5", "4", "3", "2", "J"].index(c)
+```
+
+
+### Part 2
+
+Part 2 was not too different, simply required the addition of Joker cards as bonus points whenever available, not much to comment
+
+</details>
+
+## Day 8
+<details><summary>(click here for details)</summary>
+
+### Part 1
+
+Day 8 was very easy too, really not much more than parsing the input text and following the route instructions as given, my whole python file for the part 1 solution is only 30 lines long
+
+### Part 2
+
+Part 2 had a little problem with the description not specifying a specific property in the given input set that does not necessarily have to be there, because WITH that property, you can simply use LCM (Lowest Common Multiple) to find the answer pretty easily, but without that property you would have no choice but to actually brute force it the entire way, or at least twice for each loop if you did manage to fully optimize it, and brute forcing simply does not work because of how many iterations you need.
+
+That property being the assumption that the size of the loop (from Z, back to Z) is always the same as the size as the distance to reach the end (from A, to Z).
+
+This felt a little unsatisfying as a solution because it relied on a hidden property of the given input rather than the system given in the question itself
+
+
+</details>
+
+## Day 10
+<details><summary>(click here for details)</summary>
+
+### Part 1
+
+Part 1 was pretty straightforward, many different ways to go about the problem though. I solved it by sending a signal from both sides of the starting point, until they meet at the furthest side of the pipes, when they do, the iteration count will be the answer.
+
+### Part 2
+
+I could not finish part 2, as i did not have the time to rewrite the whole system after realising that i have to account for the gaps between pipes, and not just what tile is or is not inside the main loop, at that time i did not have more hours to spare, and when i was finally done with exams and all, advent of code 2023 was already finished and i did not have the motivation to go back and finish everything now that everyone had already moved on. Maybe next year i'll be able to finish it, stay tuned :)
+
+</details>
 
 <br /> 
-
-#
-
-### The rest will be added once I get back to it, currently busy with exams and life
